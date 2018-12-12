@@ -46,7 +46,7 @@ int Cell::getValue(){ return value; }
 
 void Cell::loadTexture()
 {
-    char name_texture[20] = "cell_";
+    char name_texture[20] = "./images/cell_";
     char value_s[3];
     //printf("STRING: %s,VALORE: %d\n",name_texture,this->value);
     itoa(this->value,value_s,10);
