@@ -3,20 +3,25 @@
 #include <time.h>
 
 #define N 22
-#define N_BOMBS 50
+#define N_BOMBS 20
 
 void restart();
+void reset();
 void setBombs();
 void setNumbersOfBombs();
 void deepSearch(int i, int j);
 
 Cell field[N][N];
+bool lose = false;
 int main()
 {
 
 
     sf::Text text;
+    sf::Text option;
+    sf::Text author;
     sf::Font font;
+    sf::Image image;
 
     srand((unsigned)time(NULL));
 
@@ -33,10 +38,26 @@ int main()
         text.setFillColor(sf::Color::White);
         text.setStyle(sf::Text::Bold);
         text.move(310,0);
+
+        option.setFont(font);
+        option.setString("PRESS R to RESTART");
+        option.setFillColor(sf::Color::White);
+        option.setStyle(sf::Text::Bold);
+        option.move(340,780);
+
+        author.setFont(font);
+        author.setString("Author: Gallottino");
+        author.setFillColor(sf::Color::White);
+        author.setStyle(sf::Text::Bold);
+        author.move(600,780);
     }
 
+    if(!image.loadFromFile("./images/cell_88.png")){
 
-    sf::RenderWindow window(sf::VideoMode(850, 800), "MineSweeper");
+    }
+
+    sf::RenderWindow window(sf::VideoMode(26*32, 26*32), "MineSweeper");
+    window.setIcon(32,32,image.getPixelsPtr());
 
     while (window.isOpen())
     {
@@ -46,28 +67,37 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            if(!lose && sf::Mouse::isButtonPressed(sf::Mouse::Left) ){
                 sf::Vector2i pos = sf::Mouse::getPosition(window);
                 int i = pos.x/32 - 2;
                 int j = pos.y/32 - 2;
-                printf("%d %d\n",i,j);
+                //printf("%d %d\n",i,j);
                 if(i>=0 && i<N && j>=0 && j<N){
                     if(field[i][j].getValue() == 88){
+                        lose = true;
                         restart();
-                        setBombs();
+                        //setBombs();
                     }
                     else
                         deepSearch(i,j);
                 }
             }
-            if(sf::Mouse::isButtonPressed(sf::Mouse::Right)){
+            if(!lose && sf::Mouse::isButtonPressed(sf::Mouse::Right)){
+
+
+
                 sf::Vector2i pos = sf::Mouse::getPosition(window);
                 int i = pos.x/32 - 2;
                 int j = pos.y/32 - 2;
-                printf("%d %d\n",i,j);
+                //printf("%d %d\n",i,j);
                 if(i>=0 && i<N && j>=0 && j<N){
                     field[i][j].setFlag();
                 }
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R){
+                //printf("EVENT CATCH\n");
+                reset();
+                setBombs();
             }
         }
 
@@ -80,20 +110,41 @@ int main()
         }
         field[0][0].draw(&window);
         window.draw(text);
+        window.draw(option);
+        window.draw(author);
         window.display();
     }
 
     return 0;
 }
 
+void reset()
+{
+    for(int i=0; i<N;i++){
+        for(int j=0; j<N;j++){
+            field[i][j].setValue(0);
+        }
+    }
+    lose = false;
+}
+
 void restart()
 {
+    for(int i=0; i<N;i++){
+        for(int j=0; j<N;j++){
+            if(field[i][j].getValue()==88)
+                field[i][j].setCheck(true);
+        }
+    }
+
+    /*
     for(int i=0; i<N;i++){
         for(int j=0; j<N;j++){
             field[i][j].setCheck(false);
             field[i][j].setValue(0);
         }
     }
+    */
 }
 
 void deepSearch(int i, int j)
@@ -177,7 +228,9 @@ void setNumbersOfBombs()
                         field[i][j].setValue(1);
                 }
             }
-          field[i][j].loadTexture();
+            //field[i][j].setCheck(false);
+            field[i][j].loadTexture();
+            field[i][j].setCheck(false);
         }
     }
 }
