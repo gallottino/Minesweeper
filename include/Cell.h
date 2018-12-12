@@ -16,6 +16,7 @@ class Cell
         int getY();
         void setValue(int value);
         int getValue();
+        void setCheck();
         void draw(sf::RenderWindow *window);
         void loadTexture();
 
@@ -25,6 +26,7 @@ class Cell
         int x,y,value;
         bool checked;
         sf::Texture texture;
+        sf::Texture covered;
         sf::Sprite sprite;
 
 };

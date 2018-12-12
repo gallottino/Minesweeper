@@ -58,8 +58,16 @@ void Cell::loadTexture()
         std::cout << "Error!" << std::endl;
         //printf("%s %s %d\n",name_texture,value_s,this->value);
     }
+    if (!covered.loadFromFile("./images/cell.png",sf::IntRect(0, 0, 32, 32))){
+        // error...
+        std::cout << "Error!" << std::endl;
+        //printf("%s %s %d\n",name_texture,value_s,this->value);
+    }
     else{
-        sprite.setTexture(texture);
+        if(checked)
+            sprite.setTexture(texture);
+        else
+            sprite.setTexture(covered);
     }
 }
 
@@ -68,3 +76,5 @@ void Cell::draw(sf::RenderWindow *window)
 
     window->draw(sprite);
 }
+
+void Cell::setCheck(){this->checked = true;sprite.setTexture(texture);}

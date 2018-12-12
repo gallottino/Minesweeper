@@ -35,7 +35,7 @@ int main()
     }
 
 
-    sf::RenderWindow window(sf::VideoMode(850, 800), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(850, 800), "MineSweeper");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
@@ -46,6 +46,15 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                sf::Vector2i pos = sf::Mouse::getPosition();
+                int i = pos.x/32 - 19;
+                int j = pos.y/32 -7;
+                //printf("%d %d\n",i,j);
+                if(i>=0 && i<N && j>=0 && j<N)
+                    field[i][j].setCheck();
+            }
         }
 
         window.clear();
