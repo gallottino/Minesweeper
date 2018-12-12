@@ -64,6 +64,11 @@ void Cell::loadTexture()
         std::cout << "Error!" << std::endl;
         //printf("%s %s %d\n",name_texture,value_s,this->value);
     }
+    if (!flaged.loadFromFile("./images/flag.png",sf::IntRect(0, 0, 32, 32))){
+        // error...
+        std::cout << "Error!" << std::endl;
+        //printf("%s %s %d\n",name_texture,value_s,this->value);
+    }
     else{
         if(checked)
             sprite.setTexture(texture);
@@ -88,3 +93,17 @@ void Cell::setCheck(bool value)
 }
 
 bool Cell::getCheck(){return this->checked;}
+
+void Cell::setFlag()
+{
+    if(!checked){
+        if(flag){
+                flag = false;
+                sprite.setTexture(covered);
+        }
+        else{
+            flag = true;
+            sprite.setTexture(flaged);
+        }
+    }
+}

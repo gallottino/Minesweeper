@@ -18,6 +18,7 @@ class Cell
         int getValue();
         void setCheck(bool value);
         bool getCheck();
+        void setFlag();
         void draw(sf::RenderWindow *window);
         void loadTexture();
 
@@ -25,9 +26,10 @@ class Cell
 
     private:
         int x,y,value;
-        bool checked;
+        bool checked,flag;
         sf::Texture texture;
         sf::Texture covered;
+        sf::Texture flaged;
         sf::Sprite sprite;
 
 };

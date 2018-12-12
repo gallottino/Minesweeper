@@ -62,6 +62,15 @@ int main()
                         deepSearch(i,j);
                 }
             }
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Right)){
+                sf::Vector2i pos = sf::Mouse::getPosition();
+                int i = pos.x/32 - 19;
+                int j = pos.y/32 -7;
+                //printf("%d %d\n",i,j);
+                if(i>=0 && i<N && j>=0 && j<N){
+                    field[i][j].setFlag();
+                }
+            }
         }
 
         window.clear();
