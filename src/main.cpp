@@ -28,17 +28,15 @@ int main()
     }
     else{
         text.setFont(font);
-        text.setString("Minesweeper - By Gallottino");
+        text.setString("Minesweeper 88");
         text.setCharacterSize(50);
-        text.setFillColor(sf::Color::Blue);
+        text.setFillColor(sf::Color::White);
         text.setStyle(sf::Text::Bold);
-        text.move(sf::Vector2f(220,0));
+        text.move(310,0);
     }
 
 
     sf::RenderWindow window(sf::VideoMode(850, 800), "MineSweeper");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
 
     while (window.isOpen())
     {
@@ -49,10 +47,10 @@ int main()
                 window.close();
 
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-                sf::Vector2i pos = sf::Mouse::getPosition();
-                int i = pos.x/32 - 19;
-                int j = pos.y/32 -7;
-                //printf("%d %d\n",i,j);
+                sf::Vector2i pos = sf::Mouse::getPosition(window);
+                int i = pos.x/32 - 2;
+                int j = pos.y/32 - 2;
+                printf("%d %d\n",i,j);
                 if(i>=0 && i<N && j>=0 && j<N){
                     if(field[i][j].getValue() == 88){
                         restart();
@@ -63,10 +61,10 @@ int main()
                 }
             }
             if(sf::Mouse::isButtonPressed(sf::Mouse::Right)){
-                sf::Vector2i pos = sf::Mouse::getPosition();
-                int i = pos.x/32 - 19;
-                int j = pos.y/32 -7;
-                //printf("%d %d\n",i,j);
+                sf::Vector2i pos = sf::Mouse::getPosition(window);
+                int i = pos.x/32 - 2;
+                int j = pos.y/32 - 2;
+                printf("%d %d\n",i,j);
                 if(i>=0 && i<N && j>=0 && j<N){
                     field[i][j].setFlag();
                 }
