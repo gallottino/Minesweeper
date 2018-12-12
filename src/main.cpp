@@ -21,7 +21,7 @@ int main()
 
     setBombs();
 
-    if (!font.loadFromFile("arial.ttf"))
+    if (!font.loadFromFile("./fonts/arial.ttf"))
     {
 
     }
