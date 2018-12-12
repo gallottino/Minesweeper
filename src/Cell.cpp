@@ -36,10 +36,11 @@ int Cell::getY(){ return y; }
 void Cell::setValue(int value)
 {
     int before = this->value;
-    this->value += value;
-    if(this->value == 176){
-        printf("%d    ERROREEEEEEEE\n ",before);
-    }
+    if(value != 0)
+        this->value += value;
+    else
+        this->value = value;
+
 }
 
 int Cell::getValue(){ return value; }
@@ -77,4 +78,13 @@ void Cell::draw(sf::RenderWindow *window)
     window->draw(sprite);
 }
 
-void Cell::setCheck(){this->checked = true;sprite.setTexture(texture);}
+void Cell::setCheck(bool value)
+{
+    this->checked = value;
+    if(value)
+        sprite.setTexture(texture);
+    else
+        sprite.setTexture(covered);
+}
+
+bool Cell::getCheck(){return this->checked;}

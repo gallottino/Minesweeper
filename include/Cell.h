@@ -16,7 +16,8 @@ class Cell
         int getY();
         void setValue(int value);
         int getValue();
-        void setCheck();
+        void setCheck(bool value);
+        bool getCheck();
         void draw(sf::RenderWindow *window);
         void loadTexture();
 
