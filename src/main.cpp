@@ -3,7 +3,7 @@
 #include <time.h>
 
 #define N 22
-#define N_BOMBS 20
+#define N_BOMBS 50
 
 void restart();
 void reset();
@@ -27,7 +27,7 @@ int main()
 
     setBombs();
 
-    if (!font.loadFromFile("./fonts/arial.ttf"))
+    if (!font.loadFromFile("../fonts/arial.ttf"))
     {
 
     }
@@ -52,7 +52,7 @@ int main()
         author.move(600,780);
     }
 
-    if(!image.loadFromFile("./images/cell_88.png")){
+    if(!image.loadFromFile("../images/cell_88.png")){
 
     }
 

@@ -47,7 +47,7 @@ int Cell::getValue(){ return value; }
 
 void Cell::loadTexture()
 {
-    char name_texture[20] = "./images/cell_";
+    char name_texture[20] = "../images/cell_";
     char value_s[3];
     //printf("STRING: %s,VALORE: %d\n",name_texture,this->value);
     itoa(this->value,value_s,10);
@@ -59,12 +59,12 @@ void Cell::loadTexture()
         std::cout << "Error!" << std::endl;
         //printf("%s %s %d\n",name_texture,value_s,this->value);
     }
-    if (!covered.loadFromFile("./images/cell.png",sf::IntRect(0, 0, 32, 32))){
+    if (!covered.loadFromFile("../images/cell.png",sf::IntRect(0, 0, 32, 32))){
         // error...
         std::cout << "Error!" << std::endl;
         //printf("%s %s %d\n",name_texture,value_s,this->value);
     }
-    if (!flaged.loadFromFile("./images/flag.png",sf::IntRect(0, 0, 32, 32))){
+    if (!flaged.loadFromFile("../images/flag.png",sf::IntRect(0, 0, 32, 32))){
         // error...
         std::cout << "Error!" << std::endl;
         //printf("%s %s %d\n",name_texture,value_s,this->value);
